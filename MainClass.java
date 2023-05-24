@@ -1,38 +1,81 @@
+
 package com.dedalus;
 
+class Employee {
 
-interface function1 {
+	 int empno=1;
+	 String ename = "Asha";
+
+	 Salary sal;
 	
-	void method1();
-}
-
-interface function2 extends function1{
 	
-	void method2();
-}
-class function implements function1,function2 {
+	
+//	public Employee() {
+//	  System.out.println("From Employee Constructor");
+//	  sal=new Salary();
+//	}
+	
+	
 
-	@Override
-	public void method1() {
-		System.out.println("Method calling from First interface");
+	public String getDetails() {
+//		Salary sal =new Salary();
+		return (empno + " -- " + ename + " --- " + sal);
+	}
+	 
+	 public void Details() {
+		System.out.println("Regular method");
+		}
+	
+
+    public void salary(double bs) {
+		    sal=new Salary();
+    	    sal.setBasic(bs);
+	        sal.setDa(0.2 * bs); 
+	        sal.setPf(0.1 * bs); 
+	        sal.setGross(bs + sal.getDa() - sal.getPf());
+	        sal.setNet(sal.getGross());
 		
 	}
 
-	@Override
-	public void method2() {
-		// TODO Auto-generated method stub
-		System.out.println("Method calling from second interface");
+}
+
+class Manager extends Employee {
+	String dept = "IT";
+		
+	public String getDetails() {
+//		Salary sal =new Salary();
+		return (empno + " -- " + ename + " --- " + dept);
 	}
 	
+	public void normal() {
+		System.out.println(" method");
+	}
+
+
 }
 
 public class MainClass {
 
 	public static void main(String[] args) {
-		function1 f1=new function();
-		f1.method1();
-		function1 f2=new function();
-		f2.method1();
+		Employee emp = new Employee();
+		
+//		Salary sal=new Salary();
+		emp.salary(1000);
+        System.out.println(emp.getDetails());
+        
+        Manager mgr = new Manager();
+        System.out.println(mgr.getDetails());
+        
+        Employee e= new Manager(); // for employee it allows regular m but manager allows overridden only
+        e.Details();
+        
+        if(emp instanceof Manager) {
+        	System.out.println("employee method");
+        }else {
+        	System.out.println("manager method");
+        }
+		
+
 
 	}
 
